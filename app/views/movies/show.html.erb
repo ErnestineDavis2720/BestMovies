@@ -25,17 +25,28 @@
             <td><strong>Director:</strong></td>
             <td><%= @movie.director %></td>
           </tr>
-
           <tr>
             <td><strong>Rating:</strong></td>
             <td><%= @movie.rating %></td>
           </tr>
+          <% @movie.reviews.each do |review| %>
+            <tr>
+              <td><strong>Review Rating</strong></td>
+              <td><%= review.try(:rating) %></td>
+            </tr>
+            <tr>
+              <td><strong>Reviw Comment</strong></td>
+              <td><%= review.try(:comment) %></td>
+            </tr>
+          <% end %>
        </tbody>
        </table>
       </div>
     </div>
   </div>
 </div>
-</div>
+
 <%= link_to 'Edit', edit_movie_path(@movie) %> |
 <%= link_to 'Back', movies_path %>
+
+<%= link_to 'New Review', new_movie_review_path(@movie) %>

@@ -4,7 +4,11 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all
+    if params[:search].blank?
+      @movies = Movie.all
+    else
+      @movies = Movie.where("title LIKE ?", "%#{params[:search]}%")
+    end
   end
 
   # GET /movies/1
